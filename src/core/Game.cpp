@@ -16,6 +16,7 @@ void Game::run() {
 }
 
 void Game::update(float delta) {
+    grid.update();
 }
 
 void Game::draw() {
@@ -24,6 +25,8 @@ void Game::draw() {
     ClearBackground(BLACK);
 
     DrawText("HELLO", 20, 20, 20, WHITE);
+
+    grid.draw();
 
     EndDrawing();
 }

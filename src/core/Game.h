@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raylib.h>
+#include "entities/Grid.h"
 
 class Game {
 public:
@@ -14,4 +15,6 @@ public:
 
 private:
     const int TARGET_FPS = 60;
+
+    Grid grid;
 };
