@@ -4,7 +4,7 @@
 Game::Game(int target_fps) :
     TARGET_FPS(target_fps),
     grid(CELL_SIZE),
-    snake(Position(2, 2))
+    snake(Position(2, 2), 3)
 {
     SetTargetFPS(60);
 }
@@ -19,6 +19,7 @@ void Game::run() {
 
 void Game::update(float delta) {
     grid.update();
+    snake.update();
 }
 
 void Game::draw() {
