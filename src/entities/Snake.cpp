@@ -4,7 +4,7 @@
 #include <chrono>
 
 Snake::Snake(Position start_pos, int start_lenght) {
-    currect_direction_ = Direction::Right;
+    current_direction_ = Direction::Right;
 
     for (int i = 0; i < start_lenght; i++) {
         Position part = start_pos;
@@ -14,6 +14,7 @@ Snake::Snake(Position start_pos, int start_lenght) {
 }
 
 void Snake::update() {
+    handleInput();
     auto now = std::chrono::steady_clock::now();
     
     if (now - last_move_ >= move_interval_) {
@@ -24,14 +25,14 @@ void Snake::update() {
 
 void Snake::move() {
     Position head = body_[0]; 
-    Direction direction = currect_direction_;
+    Direction direction = current_direction_;
 
     Position new_head = head;
     switch (direction) {
-        case Direction::Up:     break;
-        case Direction::Down:   break; 
+        case Direction::Up:     new_head.column_--; break;
+        case Direction::Down:   new_head.column_++; break; 
         case Direction::Right:  new_head.row_++; break;
-        case Direction::Left:   break;
+        case Direction::Left:   new_head.row_--; break;
     }
 
     body_.insert(body_.begin(), new_head);
@@ -48,4 +49,11 @@ void Snake::draw() {
             WHITE
         ); 
     }
+}
+
+void Snake::handleInput() {
+    if (IsKeyDown(KEY_RIGHT))   current_direction_ = Direction::Right;
+    if (IsKeyDown(KEY_LEFT))    current_direction_ = Direction::Left;
+    if (IsKeyDown(KEY_UP))      current_direction_ = Direction::Up;
+    if (IsKeyDown(KEY_DOWN))    current_direction_ = Direction::Down;
 }
