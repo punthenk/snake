@@ -1,21 +1,18 @@
 #include "Grid.h"
 #include "raylib.h"
 
-#include <cstdio>
-#include <iostream>
-
-Grid::Grid() {
-    numRows = 20;
-    numColumns = 20;
-    cellSize = 30;
+Grid::Grid(int cell_size) {
+    num_rows_ = 20;
+    num_columns_ = 20;
+    cell_size_ = cell_size;
 
     initialize();
 }
 
 void Grid::initialize() {
-    for (int x = 0; x < numRows; x++) {
-        for (int y = 0; y < numColumns; y++) {
-            grid[x][y] = 0;
+    for (int row = 0; row < num_rows_; row++) {
+        for (int column = 0; column < num_columns_; column++) {
+            grid_[row][column] = 0;
         }
     }
 }
@@ -26,10 +23,10 @@ void Grid::update() {
 }
 
 void Grid::draw() {
-    for (int row = 0; row < numRows; row++) {
-        for (int column = 0; column < numRows; column++) {
-            int cellValue = grid[row][column];
-            DrawRectangle(column * cellSize + 1, row * cellSize + 1, cellSize - 1, cellSize - 1, GREEN);
+    for (int row = 0; row < num_rows_; row++) {
+        for (int column = 0; column < num_rows_; column++) {
+            int cellValue = grid_[row][column];
+            DrawRectangle(column * cell_size_ + 1, row * cell_size_ + 1, cell_size_ - 1, cell_size_ - 1, DARKGREEN);
         }
     }
 }

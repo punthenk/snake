@@ -4,16 +4,15 @@
 
 class Grid {
 public:
-    Grid();
+    Grid(int cell_size);
     void initialize();
     void update();
     void draw();
-
-    int numRows;
-    int numColumns;
-    int cellSize;
-
-    int grid[50][50];
+    bool isCellEmpty(int row, int column);
+    int grid_[50][50];
 
 private:
+    int num_rows_;
+    int num_columns_;
+    int cell_size_;
 };

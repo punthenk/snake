@@ -1,8 +1,10 @@
 #include "Game.h"
 #include "raylib.h"
 
-Game::Game(int targetFps) :
-    TARGET_FPS(targetFps)
+Game::Game(int target_fps) :
+    TARGET_FPS(target_fps),
+    grid(CELL_SIZE),
+    snake(Position(2, 2))
 {
     SetTargetFPS(60);
 }
@@ -24,9 +26,8 @@ void Game::draw() {
 
     ClearBackground(BLACK);
 
-    DrawText("HELLO", 20, 20, 20, WHITE);
-
     grid.draw();
+    snake.draw();
 
     EndDrawing();
 }
