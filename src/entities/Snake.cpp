@@ -52,8 +52,8 @@ void Snake::draw() {
 }
 
 void Snake::handleInput() {
-    if (IsKeyDown(KEY_RIGHT))   current_direction_ = Direction::Right;
-    if (IsKeyDown(KEY_LEFT))    current_direction_ = Direction::Left;
-    if (IsKeyDown(KEY_UP))      current_direction_ = Direction::Up;
-    if (IsKeyDown(KEY_DOWN))    current_direction_ = Direction::Down;
+    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_L))   current_direction_ = Direction::Right;
+    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_H))    current_direction_ = Direction::Left;
+    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_K))      current_direction_ = Direction::Up;
+    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_J))    current_direction_ = Direction::Down;
 }
