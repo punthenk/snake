@@ -12,7 +12,7 @@ public:
     void update(float delta);
     void draw();
 
-    static const int WIDTH = 900;
+    static const int WIDTH = 600;
     static const int HEIGHT = 600;
 
     const int CELL_SIZE = 30;
