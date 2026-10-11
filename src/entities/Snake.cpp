@@ -40,6 +40,14 @@ void Snake::move() {
     else if (new_head.column_ > Grid::getGridColumns() || new_head.column_ < 0)
         is_alive = false;
 
+    for (Position cell : body_) {
+        if (new_head.row_    == cell.row_ &&
+            new_head.column_ == cell.column_)
+        {
+            is_alive = false;
+        }
+    }
+
     body_.insert(body_.begin(), new_head);
     body_.erase((body_.end() - 1));
 }
