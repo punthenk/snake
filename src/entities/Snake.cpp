@@ -1,5 +1,6 @@
 #include "Snake.h"
 #include "entities/Position.h"
+#include "entities/Grid.h"
 #include "raylib.h"
 #include <chrono>
 
@@ -34,6 +35,11 @@ void Snake::move() {
         case Direction::Right:  new_head.row_++; break;
         case Direction::Left:   new_head.row_--; break;
     }
+
+    if (new_head.row_ > Grid::getGridRows() || new_head.row_ < 0)
+        is_alive = false;
+    else if (new_head.column_ > Grid::getGridColumns() || new_head.column_ < 0)
+        is_alive = false;
 
     body_.insert(body_.begin(), new_head);
     body_.erase((body_.end() - 1));

@@ -12,6 +12,8 @@ public:
     void move();
     void handleInput();
 
+    bool is_alive = true;
+
 private:
     std::vector<Position> body_;
     int cell_size_ = 30;

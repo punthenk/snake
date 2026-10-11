@@ -1,6 +1,9 @@
 #include "Grid.h"
 #include "raylib.h"
 
+int Grid::num_rows_;
+int Grid::num_columns_;
+
 Grid::Grid(int cell_size) {
     num_rows_ = 20;
     num_columns_ = 20;
@@ -31,4 +34,11 @@ void Grid::draw() {
     }
 }
 
+int Grid::getGridRows() {
+    return num_rows_;
+}
+
+int Grid::getGridColumns() {
+    return num_columns_;
+}
 

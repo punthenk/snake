@@ -11,8 +11,11 @@ public:
     bool isCellEmpty(int row, int column);
     int grid_[50][50];
 
+    static int getGridRows();
+    static int getGridColumns();
+
 private:
-    int num_rows_;
-    int num_columns_;
+    static int num_rows_;
+    static int num_columns_;
     int cell_size_;
 };
