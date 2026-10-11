@@ -63,3 +63,7 @@ void Snake::handleInput() {
     if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_K))      current_direction_ = Direction::Up;
     if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_J))    current_direction_ = Direction::Down;
 }
+
+Position Snake::getHeadPos() {
+    return body_[0];
+}

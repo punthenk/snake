@@ -1,6 +1,7 @@
 #pragma once
 
 #include <raylib.h>
+#include "entities/FoodGenerator.h"
 #include "entities/Grid.h"
 #include "entities/Snake.h"
 
@@ -21,4 +22,5 @@ private:
 
     Grid grid;
     Snake snake;
+    FoodGenerator food_generator_;
 };

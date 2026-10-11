@@ -11,6 +11,7 @@ public:
     void draw();
     void move();
     void handleInput();
+    Position getHeadPos();
 
     bool is_alive = true;
 
@@ -20,5 +21,5 @@ private:
     Direction current_direction_;
 
     std::chrono::steady_clock::time_point last_move_ = std::chrono::steady_clock::now();
-    std::chrono::milliseconds move_interval_{500};
+    std::chrono::milliseconds move_interval_{300};
 };

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "entities/Apple.h"
 #include "raylib.h"
 
 Game::Game(int target_fps) :
@@ -20,6 +21,15 @@ void Game::run() {
 void Game::update(float delta) {
     grid.update();
     snake.update();
+    food_generator_.update();
+
+    Apple* apple = food_generator_.current_apple_;
+
+    if (snake.getHeadPos().row_     == apple->getPos().row_ &&
+        snake.getHeadPos().column_  == apple->getPos().column_) 
+    {
+        apple->setIsEaten();
+    }
 }
 
 void Game::draw() {
@@ -29,6 +39,8 @@ void Game::draw() {
 
     grid.draw();
     snake.draw();
+    if (food_generator_.current_apple_ != nullptr)
+        food_generator_.current_apple_->draw();
 
     EndDrawing();
 }
