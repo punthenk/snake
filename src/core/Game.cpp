@@ -29,6 +29,7 @@ void Game::update(float delta) {
         snake.getHeadPos().column_  == apple->getPos().column_) 
     {
         apple->setIsEaten();
+        snake.grow();
     }
 }
 

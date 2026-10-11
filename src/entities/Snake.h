@@ -12,6 +12,7 @@ public:
     void move();
     void handleInput();
     Position getHeadPos();
+    void grow();
 
     bool is_alive = true;
 

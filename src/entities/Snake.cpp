@@ -26,14 +26,13 @@ void Snake::update() {
 
 void Snake::move() {
     Position head = body_[0]; 
-    Direction direction = current_direction_;
 
     Position new_head = head;
-    switch (direction) {
+    switch (current_direction_) {
         case Direction::Up:     new_head.column_--; break;
         case Direction::Down:   new_head.column_++; break; 
-        case Direction::Right:  new_head.row_++; break;
-        case Direction::Left:   new_head.row_--; break;
+        case Direction::Right:  new_head.row_++;    break;
+        case Direction::Left:   new_head.row_--;    break;
     }
 
     if (new_head.row_ > Grid::getGridRows() || new_head.row_ < 0)
@@ -53,7 +52,7 @@ void Snake::draw() {
             cell_size_ - 1,
             cell_size_ - 1,
             WHITE
-        ); 
+        );
     }
 }
 
@@ -66,4 +65,9 @@ void Snake::handleInput() {
 
 Position Snake::getHeadPos() {
     return body_[0];
+}
+
+void Snake::grow() {
+    Position part = body_.back();
+    body_.push_back(part);
 }
