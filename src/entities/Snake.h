@@ -13,6 +13,7 @@ public:
     void handleInput();
     Position getHeadPos();
     void grow();
+    int getBodyLenght();
 
     bool is_alive = true;
 

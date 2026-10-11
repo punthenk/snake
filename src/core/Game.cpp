@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "entities/Apple.h"
 #include "raylib.h"
+#include <string>
 
 Game::Game(int target_fps) :
     TARGET_FPS(target_fps),
@@ -42,6 +43,8 @@ void Game::draw() {
     snake.draw();
     if (food_generator_.current_apple_ != nullptr)
         food_generator_.current_apple_->draw();
+
+    DrawText((std::to_string(snake.getBodyLenght())).c_str(), 20, 20, 20, WHITE);
 
     EndDrawing();
 }

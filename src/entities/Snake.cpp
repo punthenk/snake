@@ -71,3 +71,7 @@ void Snake::grow() {
     Position part = body_.back();
     body_.push_back(part);
 }
+
+int Snake::getBodyLenght() {
+    return body_.size();
+}
