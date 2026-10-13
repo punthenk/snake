@@ -8,7 +8,9 @@ set(CMAKE_BUILD_TYPE Debug)
 
 if(APPLE)
     list(APPEND CMAKE_PREFIX_PATH /opt/homebrew)
-elseif(DEFINED ENV{RAYLIB_ROOT})
+endif()
+
+if(DEFINED ENV{RAYLIB_ROOT})
     list(APPEND CMAKE_PREFIX_PATH $ENV{RAYLIB_ROOT})
 endif()
 
@@ -20,14 +22,6 @@ add_executable(snake ${SOURCES})
 
 target_include_directories(snake PRIVATE src)
 target_link_libraries(snake PRIVATE raylib)
-
-if(APPLE)
-    target_link_libraries(snake PRIVATE
-        "-framework IOKit"
-        "-framework Cocoa"
-        "-framework OpenGL"
-    )
-endif()
 
 add_custom_target(run
     COMMAND snake

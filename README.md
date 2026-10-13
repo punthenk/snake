@@ -9,8 +9,14 @@ I built this project as a small exercise for myself. I enjoy coding and figuring
 ## Requirements
 
 - C++ compiler with C++17 support
-- CMake 4.1 or newer
+- CMake 3.16 or newer
 - Raylib 5.5   
+
+Install raylib with your package manager. For example:
+
+- **Fedora:** `sudo dnf install raylib-devel`
+- **Arch:** `sudo pacman -S raylib`
+- **macOS:** `brew install raylib`
 
 ## Building and Running
 
@@ -24,15 +30,16 @@ cd snake
 Create a build directory and configure the project:
 
 ```bash
-mkdir build
-cd build
-cmake ..
-```
-
-Build and run the game:
-
-```bash
-make run
+cmake -B build
+cmake --build build --target run
 ```
 
 You can now play snake! Enjoy!
+
+### raylib installed in a custom location?
+
+Tell CMake where to find it:
+
+```bash
+cmake -B build -DCMAKE_PREFIX_PATH=/path/to/raylib-install
+```
