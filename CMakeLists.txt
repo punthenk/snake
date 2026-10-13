@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.16)
 project(snake CXX)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -8,6 +8,8 @@ set(CMAKE_BUILD_TYPE Debug)
 
 if(APPLE)
     list(APPEND CMAKE_PREFIX_PATH /opt/homebrew)
+elseif(DEFINED ENV{RAYLIB_ROOT})
+    list(APPEND CMAKE_PREFIX_PATH $ENV{RAYLIB_ROOT})
 endif()
 
 find_package(raylib 5.5 REQUIRED)
@@ -30,5 +32,5 @@ endif()
 add_custom_target(run
     COMMAND snake
     DEPENDS snake
-    WORKING_DIRECTORY ${CMAKE_PROJECT_DIR}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
 )
