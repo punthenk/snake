@@ -15,12 +15,19 @@ Snake::Snake(Position start_pos, int start_lenght) {
 }
 
 void Snake::update() {
-    handleInput();
+    Direction old_dir = current_direction_;
+    if (allow_input_)
+        handleInput();
+
+    if (current_direction_ == getOppositeDirection(old_dir))
+        current_direction_ = old_dir;
+
     auto now = std::chrono::steady_clock::now();
     
     if (now - last_move_ >= move_interval_) {
         move();
         last_move_ = now;
+        allow_input_ = true;
     }
 }
 
@@ -65,10 +72,22 @@ void Snake::draw() {
 }
 
 void Snake::handleInput() {
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_L))   current_direction_ = Direction::Right;
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_H))    current_direction_ = Direction::Left;
-    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_K))      current_direction_ = Direction::Up;
-    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_J))    current_direction_ = Direction::Down;
+    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_L)) {
+        current_direction_ = Direction::Right;  
+        allow_input_ = false;
+    }
+    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_H)) {
+        current_direction_ = Direction::Left;
+        allow_input_ = false;
+    }
+    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_K)) {
+        current_direction_ = Direction::Up;
+        allow_input_ = false;
+    }
+    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_J)) {
+        current_direction_ = Direction::Down;
+        allow_input_ = false;
+    }
 }
 
 Position Snake::getHeadPos() {
@@ -82,4 +101,13 @@ void Snake::grow() {
 
 int Snake::getBodyLenght() {
     return body_.size();
+}
+
+Direction Snake::getOppositeDirection(Direction dir) {
+    switch (dir) {
+        case Direction::Up:     return Direction::Down;
+        case Direction::Down:   return Direction::Up;
+        case Direction::Right:  return Direction::Left;
+        case Direction::Left:   return Direction::Right;
+    }
 }
