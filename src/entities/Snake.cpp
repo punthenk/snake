@@ -43,9 +43,9 @@ void Snake::move() {
         case Direction::Left:   new_head.row_--;    break;
     }
 
-    if (new_head.row_ > Grid::getGridRows() || new_head.row_ < 0)
+    if (new_head.row_ >= Grid::getGridRows() || new_head.row_ < 0)
         is_alive = false;
-    else if (new_head.column_ > Grid::getGridColumns() || new_head.column_ < 0)
+    else if (new_head.column_ >= Grid::getGridColumns() || new_head.column_ < 0)
         is_alive = false;
 
     for (Position cell : body_) {
