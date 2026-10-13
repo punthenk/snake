@@ -4,14 +4,8 @@
 #include "raylib.h"
 #include <chrono>
 
-Snake::Snake(Position start_pos, int start_lenght) {
-    current_direction_ = Direction::Right;
-
-    for (int i = 0; i < start_lenght; i++) {
-        Position part = start_pos;
-        part.column_ -= i;
-        body_.push_back(part);
-    }
+Snake::Snake(Position start_pos, int start_length) {
+    initialize(start_pos, start_length);
 }
 
 void Snake::update() {
@@ -125,5 +119,22 @@ Direction Snake::getOppositeDirection(Direction dir) {
         case Direction::Down:   return Direction::Up;
         case Direction::Right:  return Direction::Left;
         case Direction::Left:   return Direction::Right;
+    }
+}
+
+void Snake::reset() {
+    is_alive = true;
+
+    body_.erase(body_.begin(), body_.end());
+    initialize(Position(2, 2), 3);
+}
+
+void Snake::initialize(Position start_pos, int start_length) {
+    current_direction_ = Direction::Right;
+
+    for (int i = 0; i < start_length; i++) {
+        Position part = start_pos;
+        part.column_ -= i;
+        body_.push_back(part);
     }
 }

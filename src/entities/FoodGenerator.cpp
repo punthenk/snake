@@ -12,6 +12,15 @@ void FoodGenerator::update() {
     }
 }
 
+void FoodGenerator::reset() {
+    if (current_apple_ != nullptr) {
+        delete current_apple_;
+        current_apple_ = generateFood();
+    } else {
+        current_apple_ = generateFood();
+    }
+}
+
 Apple* FoodGenerator::generateFood() {
     int x = dist20_(rng_);
     int y = dist20_(rng_);

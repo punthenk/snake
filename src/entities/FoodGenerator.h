@@ -7,6 +7,7 @@ class FoodGenerator {
 public:
     FoodGenerator();
     void update();
+    void reset();
     Apple* current_apple_ = nullptr;
 
 private:

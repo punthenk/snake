@@ -11,6 +11,7 @@ public:
     void run();
     void update(float delta);
     void draw();
+    void resetGame();
 
     static const int WIDTH = 600;
     static const int HEIGHT = 600;
@@ -20,7 +21,7 @@ public:
 private:
     const int TARGET_FPS = 60;
 
-    Grid grid;
-    Snake snake;
+    Grid grid_;
+    Snake snake_;
     FoodGenerator food_generator_;
 };

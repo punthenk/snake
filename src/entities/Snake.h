@@ -7,7 +7,7 @@
 
 class Snake {
 public:
-    Snake(Position start_pos, int start_lenght);
+    Snake(Position start_pos, int start_length);
     void update();
     void draw();
     void move();
@@ -16,6 +16,7 @@ public:
     void grow();
     int getBodyLenght();
     Direction getOppositeDirection(Direction dir);
+    void reset();
 
     bool is_alive = true;
 
@@ -30,4 +31,5 @@ private:
     std::chrono::milliseconds move_interval_{200};
 
     void addDirToInputQueue(Direction dir);
+    void initialize(Position start_pos, int start_length);
 };
