@@ -24,7 +24,10 @@ private:
     int cell_size_ = 30;
     Direction current_direction_;
     bool allow_input_ = true;
+    std::vector<Direction> input_queue_;
 
     std::chrono::steady_clock::time_point last_move_ = std::chrono::steady_clock::now();
     std::chrono::milliseconds move_interval_{200};
+
+    void addDirToInputQueue(Direction dir);
 };

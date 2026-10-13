@@ -16,18 +16,25 @@ Snake::Snake(Position start_pos, int start_lenght) {
 
 void Snake::update() {
     Direction old_dir = current_direction_;
-    if (allow_input_)
-        handleInput();
-
-    if (current_direction_ == getOppositeDirection(old_dir))
-        current_direction_ = old_dir;
+    handleInput();
 
     auto now = std::chrono::steady_clock::now();
-    
+
     if (now - last_move_ >= move_interval_) {
+        Direction new_dir = current_direction_;
+
+        if (!input_queue_.empty()) {
+            new_dir = input_queue_.front();
+            input_queue_.erase(input_queue_.begin());
+        }
+
+        current_direction_ = new_dir;
+
+        if (current_direction_ == getOppositeDirection(old_dir))
+            current_direction_ = old_dir;
+
         move();
         last_move_ = now;
-        allow_input_ = true;
     }
 }
 
@@ -71,22 +78,31 @@ void Snake::draw() {
     }
 }
 
+void Snake::addDirToInputQueue(Direction dir) {
+    if (input_queue_.empty()) {
+        input_queue_.push_back(dir);
+        return;
+    }
+
+    if (input_queue_[input_queue_.size() - 1] != dir)
+        input_queue_.push_back(dir);
+
+    if (input_queue_.size() > 3)
+        input_queue_.resize(3);
+}
+
 void Snake::handleInput() {
-    if (IsKeyDown(KEY_RIGHT) || IsKeyDown(KEY_L)) {
-        current_direction_ = Direction::Right;  
-        allow_input_ = false;
+    if (IsKeyPressed(KEY_RIGHT) || IsKeyPressed(KEY_L)) {
+        addDirToInputQueue(Direction::Right);
     }
-    if (IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_H)) {
-        current_direction_ = Direction::Left;
-        allow_input_ = false;
+    if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_H)) {
+        addDirToInputQueue(Direction::Left);
     }
-    if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_K)) {
-        current_direction_ = Direction::Up;
-        allow_input_ = false;
+    if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_K)) {
+        addDirToInputQueue(Direction::Up);
     }
-    if (IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_J)) {
-        current_direction_ = Direction::Down;
-        allow_input_ = false;
+    if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_J)) {
+        addDirToInputQueue(Direction::Down);
     }
 }
 
